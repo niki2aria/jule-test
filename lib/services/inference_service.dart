@@ -1,27 +1,36 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:llama_cpp_dart/llama_cpp_dart.dart';
 
 class InferenceService {
-  static const String apiUrl = 'https://api.example.com/chat';
+  LlamaProcessor? _llamaProcessor;
 
-  Stream<String> generateResponse(List<Map<String, dynamic>> messages) async* {
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'messages': messages,
-        'model': 'gemma-3n',
-        'stream': true,
-      }),
+  Future<void> loadModel() async {
+    final modelPath = "assets/gemma-3n-E2B-it-Q8_0.gguf";
+    _llamaProcessor = LlamaProcessor(
+      modelPath,
+      ModelParams(nCtx: 2048),
+    );
+  }
+
+  Stream<String> generateResponse(List<Map<String, dynamic>> messages) {
+    String prompt = _buildPromptFromMessages(messages);
+    final inferenceParams = InferenceParams(
+      prompt: prompt,
+      temperature: 0.7,
+      topK: 40,
+      topP: 0.9,
+      nPredict: 1024,
     );
 
-    // Process the stream response
-    final lines = response.body.split('\n');
-    for (String line in lines) {
-      if (line.startsWith('data: ')) {
-        final data = jsonDecode(line.substring(6));
-        yield data['content'] ?? '';
-      }
+    if (_llamaProcessor == null) {
+      // In a real app, you'd want more robust error handling or state management.
+      throw Exception("Model not loaded. Call loadModel() first.");
     }
+    return _llamaProcessor!.inference(inferenceParams);
+  }
+
+  String _buildPromptFromMessages(List<Map<String, dynamic>> messages) {
+    // This is a placeholder for the actual prompt building logic.
+    // The format should match the model's expected input format.
+    return messages.map((m) => '${m['role']}: ${m['content']}').join('\\n');
   }
 }
