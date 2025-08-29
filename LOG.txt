@@ -19,3 +19,21 @@
 **پیشنهادات:**
 - نصب Flutter SDK در محیط برای فعال کردن تست و آنالیز.
 - بررسی و تایید این پیاده‌سازی متمرکز قبل از حرکت به اولویت‌های بعدی.
+---
+## گزارش کار - Jules
+**تاریخ:** 2025-08-29
+**کار انجام شده:**
+- پیاده‌سازی سرویس‌های صوتی و تصویری (`AudioService`, `ImageService`) مطابق با راهنما.
+- ایجاد ویجت‌های placeholder برای UI مربوط به این سرویس‌ها (`VoiceInputButton`, `MediaPreview`).
+
+**فایل‌های تغییر یافته:**
+- lib/services/audio_service.dart (ایجاد شده)
+- lib/services/image_service.dart (ایجاد شده)
+- lib/widgets/voice_input_button.dart (ایجاد شده)
+- lib/widgets/media_preview.dart (ایجاد شده)
+
+**مشکلات:**
+- همچنان مشکل عدم وجود Flutter SDK در محیط پابرجاست.
+
+**پیشنهادات:**
+- ادغام این سرویس‌ها با UI اصلی در `chat_screen`.
