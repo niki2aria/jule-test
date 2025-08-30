@@ -139,3 +139,25 @@
 
 **پیشنهادات:**
 - پس از تایید این Workflow، می‌توانیم به سراغ تست‌های کامل‌تر و بهینه‌سازی نهایی برویم.
+---
+## گزارش کار - Jules
+**تاریخ:** 2025-08-29
+**کار انجام شده:**
+- تکمیل ساختار نهایی برنامه با اضافه کردن سیستم ناوبری (Navigation) برای حرکت بین صفحات.
+- ایجاد فایل‌های placeholder برای سرویس‌های باقی‌مانده (`TrainingModeService`, `DataSummarizerService`) جهت تطابق کامل با راهنما.
+- شروع فاز تست و تضمین کیفیت با نوشتن اولین تست‌های واحد (Unit Test) و ویجت (Widget Test).
+
+**فایل‌های تغییر یافته:**
+- lib/main.dart (ایجاد شده)
+- lib/screens/main_screen.dart (ایجاد شده)
+- lib/services/training_mode_service.dart (ایجاد شده)
+- lib/services/data_summarizer_service.dart (ایجاد شده)
+- test/models/message_test.dart (ایجاد شده)
+- test/widgets/chat_message_bubble_test.dart (ایجاد شده)
+
+**مشکلات:**
+- ندارد.
+
+**پیشنهادات:**
+- نوشتن تست‌های بیشتر برای پوشش کامل‌تر کد.
+- شروع بهینه‌سازی عملکرد بر اساس نتایج تست‌ها.
