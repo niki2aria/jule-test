@@ -6,6 +6,7 @@ import '../services/audio_service.dart';
 import '../services/image_service.dart';
 import '../services/inference_service.dart';
 import '../widgets/media_preview.dart';
+import '../widgets/chat_message_bubble.dart'; // Import the new widget
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -68,8 +69,16 @@ class _ChatScreenState extends State<ChatScreen> {
     }, onError: (e) {
       setState(() {
         _isLoading = false;
-        _messages.add(Message(text: "Error: ${e.toString()}", sender: MessageSender.model));
       });
+      // Show a SnackBar with the error message
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Error: ${e.toString()}"),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     });
   }
 
@@ -127,27 +136,8 @@ class _ChatScreenState extends State<ChatScreen> {
               controller: _scrollController,
               itemCount: _messages.length,
               itemBuilder: (context, index) {
-                final message = _messages[index];
-                final isUser = message.sender == MessageSender.user;
-                return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-                  child: Row(
-                    mainAxisAlignment: isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(12.0),
-                        decoration: BoxDecoration(
-                          color: isUser ? Colors.blue : Colors.grey[300],
-                          borderRadius: BorderRadius.circular(16.0),
-                        ),
-                        child: Text(
-                          message.text,
-                          style: TextStyle(color: isUser ? Colors.white : Colors.black),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+                // Use the new ChatMessageBubble widget
+                return ChatMessageBubble(message: _messages[index]);
               },
             ),
           ),
