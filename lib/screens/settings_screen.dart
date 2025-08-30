@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../services/theme_service.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  // State will be managed in the next step
-  bool _darkModeEnabled = false;
-
-  @override
   Widget build(BuildContext context) {
+    // Access the ThemeService from the provider
+    final themeService = Provider.of<ThemeService>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
@@ -22,12 +19,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SwitchListTile(
             title: const Text("Dark Mode"),
             secondary: const Icon(Icons.dark_mode),
-            value: _darkModeEnabled,
+            value: themeService.isDarkMode,
             onChanged: (bool value) {
-              setState(() {
-                _darkModeEnabled = value;
-              });
-              // In a real app, this would also trigger a theme change.
+              // Call the service to toggle the theme
+              themeService.toggleTheme(value);
             },
           ),
           const Divider(),
