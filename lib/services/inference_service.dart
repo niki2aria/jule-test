@@ -31,6 +31,6 @@ class InferenceService {
   String _buildPromptFromMessages(List<Map<String, dynamic>> messages) {
     // This is a placeholder for the actual prompt building logic.
     // The format should match the model's expected input format.
-    return messages.map((m) => '${m['role']}: ${m['content']}').join('\\n');
+    return messages.map((m) => '${m['role']}: ${m['content']}').join('\n');
   }
 }
