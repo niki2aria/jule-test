@@ -179,3 +179,23 @@
 **پیشنهادات:**
 - اتصال گزینه حالت تاریک به سیستم تم برنامه برای تغییر واقعی ظاهر.
 - تکمیل صفحه شخصی‌سازی (`PersonalizationScreen`).
+---
+## گزارش کار - Jules
+**تاریخ:** 2025-08-29
+**کار انجام شده:**
+- پیاده‌سازی صفحه شخصی‌سازی (`PersonalizationScreen`) برای ورود اطلاعات کاربر و ترجیحات مدل.
+- ایجاد `PersonalizationService` برای مدیریت این داده‌ها (فعلاً در حافظه).
+- نوشتن تست‌های واحد و ویجت برای تضمین عملکرد صحیح این قابلیت.
+
+**فایل‌های تغییر یافته:**
+- lib/screens/personalization_screen.dart (پیاده‌سازی شده)
+- lib/services/personalization_service.dart (ایجاد شده)
+- test/screens/personalization_screen_test.dart (ایجاد شده)
+- test/services/personalization_service_test.dart (ایجاد شده)
+
+**مشکلات:**
+- ندارد.
+
+**پیشنهادات:**
+- اتصال داده‌های شخصی‌سازی به سرویس `InferenceService` برای تاثیرگذاری بر پاسخ‌های مدل.
+- ذخیره‌سازی دائمی تنظیمات شخصی‌سازی با استفاده از `shared_preferences`.
